@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F.R.I.D.A.Y. — AI Assistant</title>
+    <meta name="description" content="F.R.I.D.A.Y. - Female Replacement Intelligent Digital Assistant Youth. Your personal Iron Man AI.">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/hud.css">
+    <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+    <!-- Scan Line Overlay -->
+    <div class="scanline"></div>
+    
+    <!-- Background Grid -->
+    <div class="bg-grid"></div>
+
+    <!-- HUD Container -->
+    <div id="hud-container">
+        
+        <!-- Top Bar -->
+        <header id="top-bar">
+            <div class="top-left">
+                <div class="friday-logo">
+                    <span class="logo-dot"></span>
+                    <span class="logo-text">F.R.I.D.A.Y.</span>
+                </div>
+                <span class="version">v1.0 // STARK INDUSTRIES</span>
+            </div>
+            <div class="top-center">
+                <div id="status-indicator" class="status-badge">
+                    <span class="status-dot"></span>
+                    <span id="status-text">SYSTEM ONLINE</span>
+                </div>
+            </div>
+            <div class="top-right">
+                <span id="clock" class="hud-clock"></span>
+                <span id="date" class="hud-date"></span>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main id="main-area">
+            
+            <!-- Left Panel — System Stats -->
+            <aside id="left-panel" class="hud-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">◆</span>
+                    <span>SYSTEM DIAGNOSTICS</span>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-item">
+                        <span class="stat-label">CPU</span>
+                        <div class="stat-bar-container">
+                            <div id="cpu-bar" class="stat-bar" style="width: 0%"></div>
+                        </div>
+                        <span id="cpu-value" class="stat-value">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">RAM</span>
+                        <div class="stat-bar-container">
+                            <div id="ram-bar" class="stat-bar" style="width: 0%"></div>
+                        </div>
+                        <span id="ram-value" class="stat-value">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">DISK</span>
+                        <div class="stat-bar-container">
+                            <div id="disk-bar" class="stat-bar" style="width: 0%"></div>
+                        </div>
+                        <span id="disk-value" class="stat-value">0%</span>
+                    </div>
+                    <div class="stat-item" id="battery-stat">
+                        <span class="stat-label">BATT</span>
+                        <div class="stat-bar-container">
+                            <div id="battery-bar" class="stat-bar battery" style="width: 0%"></div>
+                        </div>
+                        <span id="battery-value" class="stat-value">—</span>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <span id="uptime-value" class="info-text">UPTIME: --h</span>
+                    <span id="platform-value" class="info-text">--</span>
+                </div>
+            </aside>
+
+            <!-- Center — Arc Reactor + Chat -->
+            <section id="center-area">
+                
+                <!-- Arc Reactor -->
+                <div id="arc-reactor-container">
+                    <div id="arc-reactor">
+                        <div class="reactor-ring ring-outer"></div>
+                        <div class="reactor-ring ring-middle"></div>
+                        <div class="reactor-ring ring-inner"></div>
+                        <div class="reactor-core"></div>
+                        <div class="reactor-glow"></div>
+                    </div>
+                    <!-- Waveform Visualizer -->
+                    <canvas id="waveform-canvas" width="300" height="80"></canvas>
+                </div>
+
+                <!-- Chat Area -->
+                <div id="chat-area">
+                    <div id="chat-messages">
+                        <div class="message friday-message welcome-msg">
+                            <span class="msg-label">F.R.I.D.A.Y.</span>
+                            <p>Systems online. All diagnostics nominal. How can I assist you today?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div id="input-area">
+                    <div id="voice-btn-container">
+                        <button id="voice-btn" class="voice-button" title="Click to speak or press Space">
+                            <svg id="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" y1="19" x2="12" y2="23"/>
+                                <line x1="8" y1="23" x2="16" y2="23"/>
+                            </svg>
+                            <div class="voice-pulse"></div>
+                            <div class="voice-pulse delay-1"></div>
+                            <div class="voice-pulse delay-2"></div>
+                        </button>
+                        <span id="voice-hint" class="voice-hint">PRESS TO SPEAK</span>
+                    </div>
+                    <div id="text-input-container">
+                        <input type="text" id="text-input" placeholder="Type a command or question..." autocomplete="off">
+                        <button id="send-btn" title="Send">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel — Activity Log -->
+            <aside id="right-panel" class="hud-panel">
+                <div class="panel-header">
+                    <span class="panel-icon">◆</span>
+                    <span>ACTIVITY LOG</span>
+                </div>
+                <div id="activity-log" class="activity-log">
+                    <div class="log-entry">
+                        <span class="log-time">--:--:--</span>
+                        <span class="log-msg">System initialized</span>
+                    </div>
+                </div>
+                <div class="panel-header" style="margin-top: 16px;">
+                    <span class="panel-icon">◆</span>
+                    <span>QUICK COMMANDS</span>
+                </div>
+                <div class="quick-commands">
+                    <button class="quick-cmd" data-cmd="What time is it?">🕐 Time</button>
+                    <button class="quick-cmd" data-cmd="Show system status">📊 Status</button>
+                    <button class="quick-cmd" data-cmd="Open Chrome">🌐 Chrome</button>
+                    <button class="quick-cmd" data-cmd="Open Calculator">🧮 Calc</button>
+                    <button class="quick-cmd" data-cmd="Search for latest tech news">📰 News</button>
+                    <button class="quick-cmd" data-cmd="Tell me a joke">😄 Joke</button>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Bottom Bar -->
+        <footer id="bottom-bar">
+            <div class="bottom-left">
+                <span class="hud-label">NEURAL NET: <span class="accent">GEMINI 2.5</span></span>
+                <span class="hud-label">VOICE: <span class="accent">ARIA-NEURAL</span></span>
+            </div>
+            <div class="bottom-center">
+                <span id="connection-status" class="connection-dot connected"></span>
+                <span class="hud-label">WEBSOCKET <span class="accent" id="ws-status">CONNECTED</span></span>
+            </div>
+            <div class="bottom-right">
+                <span class="hud-label">LATENCY: <span class="accent" id="latency-value">--ms</span></span>
+                <span class="hud-label">SESSION: <span class="accent" id="session-id">--</span></span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Audio element for playback -->
+    <audio id="audio-player" preload="none"></audio>
+
+    <script src="/js/hud.js"></script>
+    <script src="/js/voice.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
