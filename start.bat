@@ -23,21 +23,7 @@ if not exist "backend\.env" (
     exit /b
 )
 
-:: Check if Python is installed
-python --version >nul 2>&1
-if errorlevel 1 (
-    echo   [ERROR] Python not found! Please install Python 3.10+.
-    echo   Download: https://www.python.org/downloads/
-    pause
-    exit /b
-)
-
-echo   [1/2] Installing dependencies...
-pip install -r backend\requirements.txt --quiet >nul 2>&1
-echo   [OK]  Dependencies installed.
-echo.
-
-echo   [2/2] Starting F.R.I.D.A.Y. server...
+echo   Starting F.R.I.D.A.Y. server...
 echo.
 echo   ══════════════════════════════════════════════════
 echo     Open your browser:  http://localhost:8000
